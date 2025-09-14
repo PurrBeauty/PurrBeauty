@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purr Schedule - Bilingual Business Scheduling</title>
+    <meta name="description" content="Professional scheduling platform for bilingual businesses - English and Romanian support">
+    <link rel="icon" type="image/png" href="purr-icon.png">
+    
+    <style>
+        /* Design System - Based on Purr Beauty aesthetic */
+        :root {
+            --primary-bg: #FFDFF4;
+            --secondary-purple: #9A78C0;
+            --deep-blue: #5158B0;
+            --medium-purple: #804686;
+            --coral: #D38167;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2D3748;
+            --border-color: #E2E8F0;
+            --shadow-light: 0 4px 6px rgba(154, 120, 192, 0.1);
+            --shadow-medium: 0 10px 25px rgba(154, 120, 192, 0.2);
+            --gradient-primary: linear-gradient(135deg, #FFDFF4 0%, #9A78C0 100%);
+            --gradient-secondary: linear-gradient(135deg, #9A78C0 0%, #5158B0 100%);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: var(--light-gray);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary-purple);
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-secondary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--secondary-purple);
+            border: 2px solid var(--secondary-purple);
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary-purple);
+            color: var(--white);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--secondary-purple);
+            border: 2px solid var(--secondary-purple);
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary-purple);
+            color: var(--white);
+        }
+
+        /* Language Selection Page */
+        .language-selection {
+            min-height: 100vh;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .language-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .language-card h1 {
+            color: var(--secondary-purple);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .language-card p {
+            color: var(--dark-gray);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .language-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .language-btn {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: var(--border-radius);
+            border: 3px solid var(--secondary-purple);
+            background: var(--white);
+            color: var(--secondary-purple);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: bold;
+        }
+
+        .language-btn:hover {
+            background: var(--secondary-purple);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .hero {
+            background: var(--gradient-primary);
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--dark-gray);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-purple);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .card h3 {
+            color: var(--secondary-purple);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Forms */
+        .form-container {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-medium);
+            max-width: 500px;
+            margin: 2rem auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary-purple);
+            box-shadow: 0 0 0 3px rgba(154, 120, 192, 0.1);
+        }
+
+        .form-control select {
+            background: var(--white);
+        }
+
+        /* Calendar */
+        .calendar-container {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            overflow: hidden;
+        }
+
+        .calendar-header {
+            background: var(--gradient-secondary);
+            color: var(--white);
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .calendar-nav {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .calendar-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background: var(--border-color);
+        }
+
+        .calendar-day {
+            background: var(--white);
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .calendar-day:hover {
+            background: var(--primary-bg);
+        }
+
+        .calendar-day.selected {
+            background: var(--secondary-purple);
+            color: var(--white);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: var(--white);
+            min-width: 200px;
+            box-shadow: var(--shadow-medium);
+            z-index: 1000;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            right: 0;
+            top: 100%;
+        }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: var(--dark-gray);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .dropdown-content a:hover {
+            background: var(--primary-bg);
+        }
+
+        /* Hidden sections */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Dashboard layout */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            min-height: calc(100vh - 80px);
+        }
+
+        .sidebar {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            padding: 1.5rem;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav a {
+            display: block;
+            padding: 12px;
+            color: var(--dark-gray);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            background: var(--primary-bg);
+            color: var(--secondary-purple);
+        }
+
+        .content-area {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            padding: 2rem;
+        }
+
+        /* Time slots */
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .time-slot {
+            padding: 0.8rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--white);
+        }
+
+        .time-slot:hover {
+            border-color: var(--secondary-purple);
+            background: var(--primary-bg);
+        }
+
+        .time-slot.booked {
+            background: var(--coral);
+            color: var(--white);
+            cursor: not-allowed;
+        }
+
+        .time-slot.selected {
+            background: var(--secondary-purple);
+            color: var(--white);
+            border-color: var(--secondary-purple);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .language-buttons {
+                flex-direction: column;
+            }
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                order: 2;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Status indicators */
+        .status-online {
+            width: 12px;
+            height: 12px;
+            background: #10B981;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .status-busy {
+            width: 12px;
+            height: 12px;
+            background: var(--coral);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        /* Notification popup */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--white);
+            border-left: 4px solid var(--secondary-purple);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-medium);
+            z-index: 1000;
+            display: none;
+        }
+
+        .notification.show {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Selection Section -->
+    <section id="language-selection" class="section active">
+        <div class="language-selection">
+            <div class="language-card fade-in">
+                <img src="purr-icon.png" alt="Purr Schedule" style="width: 80px; height: 80px; margin-bottom: 1rem;">
+                <h1>Purr Schedule</h1>
+                <p id="welcome-text">Welcome! Select your preferred language to continue.</p>
+                <div class="language-buttons">
+                    <button class="language-btn" onclick="setLanguage('en')">🇺🇸 English</button>
+                    <button class="language-btn" onclick="setLanguage('ro')">🇷🇴 Română</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auth Section -->
+    <section id="auth-section" class="section">
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="purr-icon.png" alt="Purr Schedule">
+                        <span>Purr Schedule</span>
+                    </div>
+                    <div class="nav-buttons">
+                        <button class="btn btn-outline" onclick="showLogin()" id="login-btn">Login</button>
+                        <button class="btn btn-primary" onclick="showSignup()" id="signup-btn">Sign Up</button>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary" onclick="toggleLanguageDropdown()" id="lang-toggle">🌐 Language</button>
+                            <div id="language-dropdown" class="dropdown-content">
+                                <a href="#" onclick="setLanguage('en')">🇺🇸 English</a>
+                                <a href="#" onclick="setLanguage('ro')">🇷🇴 Română</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container main-content">
+            <!-- Login Form -->
+            <div id="login-form" class="form-container fade-in" style="display: none;">
+                <h2 id="login-title">Login to Your Account</h2>
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="account-type-login" id="account-type-label">Account Type</label>
+                        <select class="form-control" id="account-type-login" required>
+                            <option value="client" id="client-option">Client</option>
+                            <option value="creator" id="creator-option">Creator</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="username-login" id="username-label">Username</label>
+                        <input type="text" class="form-control" id="username-login" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password-login" id="password-label">Password</label>
+                        <input type="password" class="form-control" id="password-login" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;" id="login-submit">Login</button>
+                </form>
+                <p style="text-align: center; margin-top: 1rem;">
+                    <a href="#" onclick="showSignup()" id="signup-link">Don't have an account? Sign up</a>
+                </p>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-form" class="form-container fade-in" style="display: none;">
+                <h2 id="signup-title">Create Your Account</h2>
+                <form onsubmit="handleSignup(event)">
+                    <div class="form-group">
+                        <label for="account-type-signup" id="account-type-signup-label">Account Type</label>
+                        <select class="form-control" id="account-type-signup" onchange="toggleSignupFields()" required>
+                            <option value="client">Client</option>
+                            <option value="creator">Creator</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="language-signup" id="language-signup-label">Preferred Language</label>
+                        <select class="form-control" id="language-signup" required>
+                            <option value="en">English</option>
+                            <option value="ro">Română</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="username-signup" id="username-signup-label">Username</label>
+                        <input type="text" class="form-control" id="username-signup" required>
+                    </div>
+                    <div id="business-name-group" class="form-group" style="display: none;">
+                        <label for="business-name" id="business-name-label">Business Name</label>
+                        <input type="text" class="form-control" id="business-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email-signup" id="email-label">Email</label>
+                        <input type="email" class="form-control" id="email-signup" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone-signup" id="phone-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone-signup" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password-signup" id="password-signup-label">Password</label>
+                        <input type="password" class="form-control" id="password-signup" required>
+                    </div>
+                    
+                    <!-- Creator-specific fields -->
+                    <div id="location-fields" style="display: none;">
+                        <div class="form-group">
+                            <label for="county" id="county-label">County</label>
+                            <input type="text" class="form-control" id="county">
+                        </div>
+                        <div class="form-group">
+                            <label for="city" id="city-label">City</label>
+                            <input type="text" class="form-control" id="city">
+                        </div>
+                        <div class="form-group">
+                            <label for="street" id="street-label">Street</label>
+                            <input type="text" class="form-control" id="street">
+                        </div>
+                        <div class="form-group">
+                            <label for="number" id="number-label">Number / Flat / Apartment (optional)</label>
+                            <input type="text" class="form-control" id="number">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;" id="signup-submit">Create Account</button>
+                </form>
+                <p style="text-align: center; margin-top: 1rem;">
+                    <a href="#" onclick="showLogin()" id="login-link">Already have an account? Login</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard-section" class="section">
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="purr-icon.png" alt="Purr Schedule">
+                        <span>Purr Schedule</span>
+                    </div>
+                    <div class="nav-buttons">
+                        <span id="user-welcome">Welcome!</span>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary" onclick="toggleUserDropdown()" id="user-menu">👤 Info</button>
+                            <div id="user-dropdown" class="dropdown-content">
+                                <a href="#" onclick="showUserInfo()" id="user-info-link">Account Info</a>
+                                <a href="#" onclick="showPasswordReset()" id="password-reset-link">Reset Password</a>
+                                <a href="#" onclick="logout()" id="logout-link">Sign Out</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="dashboard">
+                <!-- Sidebar Navigation -->
+                <div class="sidebar">
+                    <nav>
+                        <ul>
+                            <li><a href="#" onclick="showDashboardTab('calendar')" class="nav-link active" id="nav-calendar">📅 Calendar</a></li>
+                            <li id="nav-schedule-li" style="display: none;"><a href="#" onclick="showDashboardTab('schedule')" class="nav-link" id="nav-schedule">🕒 Schedule</a></li>
+                            <li id="nav-services-li" style="display: none;"><a href="#" onclick="showDashboardTab('services')" class="nav-link" id="nav-services">🛠️ Services</a></li>
+                            <li><a href="#" onclick="showDashboardTab('following')" class="nav-link" id="nav-following">👥 Following</a></li>
+                            <li id="nav-search-li"><a href="#" onclick="showDashboardTab('search')" class="nav-link" id="nav-search">🔍 Search</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Main Content Area -->
+                <div class="content-area">
+                    <!-- Calendar Tab -->
+                    <div id="calendar-tab" class="dashboard-tab active">
+                        <h2 id="calendar-title">Calendar</h2>
+                        <div class="calendar-container">
+                            <div class="calendar-header">
+                                <button class="calendar-nav" onclick="previousMonth()">‹</button>
+                                <span id="current-month">January 2025</span>
+                                <button class="calendar-nav" onclick="nextMonth()">›</button>
+                            </div>
+                            <div class="calendar-grid" id="calendar-grid">
+                                <!-- Calendar days will be generated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div id="appointment-form" style="display: none; margin-top: 2rem;">
+                            <h3 id="appointment-title">Book Appointment</h3>
+                            <div class="form-group">
+                                <label id="select-time-label">Select Time:</label>
+                                <div class="time-slots" id="time-slots">
+                                    <!-- Time slots will be generated by JavaScript -->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="client-name" id="client-name-label">Client Name:</label>
+                                <input type="text" class="form-control" id="client-name">
+                            </div>
+                            <div class="form-group" id="service-selection">
+                                <label for="service-select" id="service-label">Service:</label>
+                                <select class="form-control" id="service-select">
+                                    <!-- Services will be populated by JavaScript -->
+                                </select>
+                            </div>
+                            <button class="btn btn-primary" onclick="bookAppointment()" id="book-btn">Book Appointment</button>
+                            <button class="btn btn-secondary" onclick="cancelBooking()" id="cancel-btn">Cancel</button>
+                        </div>
+                    </div>
+
+                    <!-- Schedule Tab (Creator only) -->
+                    <div id="schedule-tab" class="dashboard-tab">
+                        <h2 id="schedule-title">Working Schedule</h2>
+                        <div class="card">
+                            <h3 id="working-days-title">Working Days</h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1rem 0;">
+                                <label><input type="checkbox" id="monday" checked> <span id="monday-label">Monday</span></label>
+                                <label><input type="checkbox" id="tuesday" checked> <span id="tuesday-label">Tuesday</span></label>
+                                <label><input type="checkbox" id="wednesday" checked> <span id="wednesday-label">Wednesday</span></label>
+                                <label><input type="checkbox" id="thursday" checked> <span id="thursday-label">Thursday</span></label>
+                                <label><input type="checkbox" id="friday" checked> <span id="friday-label">Friday</span></label>
+                                <label><input type="checkbox" id="saturday"> <span id="saturday-label">Saturday</span></label>
+                                <label><input type="checkbox" id="sunday"> <span id="sunday-label">Sunday</span></label>
+                            </div>
+                            
+                            <h3 id="working-hours-title">Working Hours</h3>
+                            <div style="display: flex; gap: 1rem; align-items: center; margin: 1rem 0;">
+                                <label id="start-time-label">Start: <input type="time" id="start-time" value="09:00"></label>
+                                <label id="end-time-label">End: <input type="time" id="end-time" value="17:00"></label>
+                            </div>
+                            
+                            <button class="btn btn-primary" onclick="saveSchedule()" id="save-schedule-btn">Save Schedule</button>
+                        </div>
+                    </div>
+
+                    <!-- Services Tab (Creator only) -->
+                    <div id="services-tab" class="dashboard-tab">
+                        <h2 id="services-title">Services</h2>
+                        <button class="btn btn-primary" onclick="showAddService()" id="add-service-btn">Add New Service</button>
+                        
+                        <div id="add-service-form" style="display: none; margin-top: 2rem;">
+                            <div class="card">
+                                <h3 id="add-service-title">Add Service</h3>
+                                <div class="form-group">
+                                    <label for="service-name" id="service-name-label">Service Name:</label>
+                                    <input type="text" class="form-control" id="service-name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="service-duration" id="service-duration-label">Duration (minutes):</label>
+                                    <input type="number" class="form-control" id="service-duration" min="15" step="15" value="60">
+                                </div>
+                                <div class="form-group">
+                                    <label for="service-price" id="service-price-label">Price (optional):</label>
+                                    <input type="number" class="form-control" id="service-price" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label for="service-currency" id="service-currency-label">Currency:</label>
+                                    <select class="form-control" id="service-currency">
+                                        <option value="RON">RON</option>
+                                        <option value="EUR">EUR</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" onclick="addService()" id="save-service-btn">Save Service</button>
+                                <button class="btn btn-secondary" onclick="hideAddService()" id="cancel-service-btn">Cancel</button>
+                            </div>
+                        </div>
+                        
+                        <div id="services-list" style="margin-top: 2rem;">
+                            <!-- Services will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Following Tab -->
+                    <div id="following-tab" class="dashboard-tab">
+                        <h2 id="following-title">Following</h2>
+                        <div id="following-list">
+                            <!-- Following list will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Search Tab (Client only) -->
+                    <div id="search-tab" class="dashboard-tab">
+                        <h2 id="search-title">Search Creators</h2>
+                        <div class="form-group">
+                            <label for="search-username" id="search-username-label">Search by username:</label>
+                            <div style="display: flex; gap: 1rem;">
+                                <input type="text" class="form-control" id="search-username" placeholder="Enter username...">
+                                <button class="btn btn-primary" onclick="searchCreator()" id="search-btn">Search</button>
+                            </div>
+                        </div>
+                        <div id="search-results" style="margin-top: 2rem;">
+                            <!-- Search results will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- User Info Tab -->
+                    <div id="user-info-tab" class="dashboard-tab">
+                        <h2 id="user-info-title">Account Information</h2>
+                        <div class="card">
+                            <div id="user-details">
+                                <!-- User details will be populated by JavaScript -->
+                            </div>
+                            <button class="btn btn-primary" onclick="editUserInfo()" id="edit-info-btn">Edit Information</button>
+                        </div>
+                    </div>
+
+                    <!-- Password Reset Tab -->
+                    <div id="password-reset-tab" class="dashboard-tab">
+                        <h2 id="password-reset-title">Reset Password</h2>
+                        <div class="card">
+                            <p id="password-reset-instructions">To reset your password, please send an email to contact.purrschedule@gmail.com requesting a reset code. Enter the 4-digit code below:</p>
+                            <div class="form-group">
+                                <label for="reset-code" id="reset-code-label">4-digit code:</label>
+                                <input type="text" class="form-control" id="reset-code" maxlength="4" placeholder="2009">
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password" id="new-password-label">New password:</label>
+                                <input type="password" class="form-control" id="new-password">
+                            </div>
+                            <button class="btn btn-primary" onclick="resetPassword()" id="reset-password-btn">Reset Password</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <strong id="notification-title">Reminder!</strong>
+        <p id="notification-text"></p>
+        <button onclick="closeNotification()" style="background: none; border: none; float: right; cursor: pointer;">×</button>
+    </div>
+
+    <script>
+        // Global state
+        let currentLanguage = 'en';
+        let currentUser = null;
+        let currentDate = new Date();
+        let selectedDate = null;
+        let selectedTime = null;
+
+        // Language translations
+        const translations = {
+            en: {
+                'welcome-text': 'Welcome! Select your preferred language to continue.',
+                'login-btn': 'Login',
+                'signup-btn': 'Sign Up',
+                'lang-toggle': '🌐 Language',
+                'login-title': 'Login to Your Account',
+                'signup-title': 'Create Your Account',
+                'account-type-label': 'Account Type',
+                'client-option': 'Client',
+                'creator-option': 'Creator',
+                'username-label': 'Username',
+                'password-label': 'Password',
+                'login-submit': 'Login',
+                'signup-link': "Don't have an account? Sign up",
+                'login-link': "Already have an account? Login",
+                'account-type-signup-label': 'Account Type',
+                'language-signup-label': 'Preferred Language',
+                'username-signup-label': 'Username',
+                'business-name-label': 'Business Name',
+                'email-label': 'Email',
+                'phone-label': 'Phone Number',
+                'password-signup-label': 'Password',
+                'county-label': 'County',
+                'city-label': 'City',
+                'street-label': 'Street',
+                'number-label': 'Number / Flat / Apartment (optional)',
+                'signup-submit': 'Create Account',
+                'user-menu': '👤 Info',
+                'user-info-link': 'Account Info',
+                'password-reset-link': 'Reset Password',
+                'logout-link': 'Sign Out',
+                'nav-calendar': '📅 Calendar',
+                'nav-schedule': '🕒 Schedule',
+                'nav-services': '🛠️ Services',
+                'nav-following': '👥 Following',
+                'nav-search': '🔍 Search',
+                'calendar-title': 'Calendar',
+                'appointment-title': 'Book Appointment',
+                'select-time-label': 'Select Time:',
+                'client-name-label': 'Client Name:',
+                'service-label': 'Service:',
+                'book-btn': 'Book Appointment',
+                'cancel-btn': 'Cancel',
+                'schedule-title': 'Working Schedule',
+                'working-days-title': 'Working Days',
+                'monday-label': 'Monday',
+                'tuesday-label': 'Tuesday',
+                'wednesday-label': 'Wednesday',
+                'thursday-label': 'Thursday',
+                'friday-label': 'Friday',
+                'saturday-label': 'Saturday',
+                'sunday-label': 'Sunday',
+                'working-hours-title': 'Working Hours',
+                'start-time-label': 'Start:',
+                'end-time-label': 'End:',
+                'save-schedule-btn': 'Save Schedule',
+                'services-title': 'Services',
+                'add-service-btn': 'Add New Service',
+                'add-service-title': 'Add Service',
+                'service-name-label': 'Service Name:',
+                'service-duration-label': 'Duration (minutes):',
+                'service-price-label': 'Price (optional):',
+                'service-currency-label': 'Currency:',
+                'save-service-btn': 'Save Service',
+                'cancel-service-btn': 'Cancel',
+                'following-title': 'Following',
+                'search-title': 'Search Creators',
+                'search-username-label': 'Search by username:',
+                'search-btn': 'Search',
+                'user-info-title': 'Account Information',
+                'edit-info-btn': 'Edit Information',
+                'password-reset-title': 'Reset Password',
+                'password-reset-instructions': 'To reset your password, please send an email to contact.purrschedule@gmail.com requesting a reset code. Enter the 4-digit code below:',
+                'reset-code-label': '4-digit code:',
+                'new-password-label': 'New password:',
+                'reset-password-btn': 'Reset Password',
+                'notification-title': 'Reminder!',
+                'user-not-found': 'This user does not exist',
+                'follow-success': 'Successfully followed!',
+                'appointment-booked': 'Appointment booked successfully!',
+                'schedule-saved': 'Schedule saved successfully!',
+                'service-added': 'Service added successfully!',
+                'password-reset-success': 'Password reset successfully!',
+                'invalid-reset-code': 'Invalid reset code. The correct code is 2009.',
+                'reminder-text': 'Hello! You have an appointment at {time} at {location} with {business}. If you want to make changes, please contact {business} at {phone}. Thank you!'
+            },
+            ro: {
+                'welcome-text': 'Bun venit! Selectați limba preferată pentru a continua.',
+                'login-btn': 'Conectare',
+                'signup-btn': 'Înregistrare',
+                'lang-toggle': '🌐 Limbă',
+                'login-title': 'Conectare în cont',
+                'signup-title': 'Creează-ți contul',
+                'account-type-label': 'Tipul contului',
+                'client-option': 'Client',
+                'creator-option': 'Creator',
+                'username-label': 'Nume utilizator',
+                'password-label': 'Parolă',
+                'login-submit': 'Conectare',
+                'signup-link': "Nu ai cont? Înregistrează-te",
+                'login-link': "Ai deja cont? Conectează-te",
+                'account-type-signup-label': 'Tipul contului',
+                'language-signup-label': 'Limba preferată',
+                'username-signup-label': 'Nume utilizator',
+                'business-name-label': 'Numele afacerii',
+                'email-label': 'Email',
+                'phone-label': 'Numărul de telefon',
+                'password-signup-label': 'Parolă',
+                'county-label': 'Județul',
+                'city-label': 'Orașul',
+                'street-label': 'Strada',
+                'number-label': 'Numărul / Apartament (opțional)',
+                'signup-submit': 'Creează cont',
+                'user-menu': '👤 Info',
+                'user-info-link': 'Informații cont',
+                'password-reset-link': 'Resetează parola',
+                'logout-link': 'Deconectare',
+                'nav-calendar': '📅 Calendar',
+                'nav-schedule': '🕒 Program',
+                'nav-services': '🛠️ Servicii',
+                'nav-following': '👥 Urmăresc',
+                'nav-search': '🔍 Căutare',
+                'calendar-title': 'Calendar',
+                'appointment-title': 'Programează întâlnire',
+                'select-time-label': 'Selectează ora:',
+                'client-name-label': 'Numele clientului:',
+                'service-label': 'Serviciu:',
+                'book-btn': 'Programează',
+                'cancel-btn': 'Anulează',
+                'schedule-title': 'Programul de lucru',
+                'working-days-title': 'Zilele de lucru',
+                'monday-label': 'Luni',
+                'tuesday-label': 'Marți',
+                'wednesday-label': 'Miercuri',
+                'thursday-label': 'Joi',
+                'friday-label': 'Vineri',
+                'saturday-label': 'Sâmbătă',
+                'sunday-label': 'Duminică',
+                'working-hours-title': 'Orele de lucru',
+                'start-time-label': 'Început:',
+                'end-time-label': 'Sfârșit:',
+                'save-schedule-btn': 'Salvează programul',
+                'services-title': 'Servicii',
+                'add-service-btn': 'Adaugă serviciu nou',
+                'add-service-title': 'Adaugă serviciu',
+                'service-name-label': 'Numele serviciului:',
+                'service-duration-label': 'Durata (minute):',
+                'service-price-label': 'Prețul (opțional):',
+                'service-currency-label': 'Moneda:',
+                'save-service-btn': 'Salvează serviciul',
+                'cancel-service-btn': 'Anulează',
+                'following-title': 'Urmăresc',
+                'search-title': 'Caută creatori',
+                'search-username-label': 'Caută după nume utilizator:',
+                'search-btn': 'Caută',
+                'user-info-title': 'Informații cont',
+                'edit-info-btn': 'Editează informațiile',
+                'password-reset-title': 'Resetează parola',
+                'password-reset-instructions': 'Pentru a reseta parola, trimiteți un email la contact.purrschedule@gmail.com solicitând un cod de resetare. Introduceți codul de 4 cifre mai jos:',
+                'reset-code-label': 'Cod de 4 cifre:',
+                'new-password-label': 'Parolă nouă:',
+                'reset-password-btn': 'Resetează parola',
+                'notification-title': 'Reamintire!',
+                'user-not-found': 'Acest utilizator nu există',
+                'follow-success': 'Urmărire cu succes!',
+                'appointment-booked': 'Programarea a fost făcută cu succes!',
+                'schedule-saved': 'Programul a fost salvat cu succes!',
+                'service-added': 'Serviciul a fost adăugat cu succes!',
+                'password-reset-success': 'Parola a fost resetată cu succes!',
+                'invalid-reset-code': 'Cod de resetare invalid. Codul corect este 2009.',
+                'reminder-text': 'Bună! Aveți o programare la {time} la {location} cu {business}. Dacă doriți să faceți modificări, contactați {business} la {phone}. Mulțumesc!'
+            }
+        };
+
+        // Initialize app
+        function initApp() {
+            const savedLanguage = localStorage.getItem('purrschedule-language');
+            const savedUser = localStorage.getItem('purrschedule-user');
+            
+            if (savedLanguage) {
+                currentLanguage = savedLanguage;
+                updateLanguage();
+            }
+            
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showDashboard();
+            }
+            
+            generateCalendar();
+            generateTimeSlots();
+            checkReminders();
+            
+            // Check reminders every minute
+            setInterval(checkReminders, 60000);
+        }
+
+        // Language functions
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('purrschedule-language', lang);
+            updateLanguage();
+            showAuth();
+        }
+
+        function updateLanguage() {
+            const elements = document.querySelectorAll('[id]');
+            elements.forEach(element => {
+                if (translations[currentLanguage][element.id]) {
+                    if (element.tagName === 'INPUT' && element.type !== 'text' && element.type !== 'email' && element.type !== 'tel' && element.type !== 'password') {
+                        element.value = translations[currentLanguage][element.id];
+                    } else {
+                        element.textContent = translations[currentLanguage][element.id];
+                    }
+                }
+            });
+        }
+
+        // Navigation functions
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function showAuth() {
+            showSection('auth-section');
+            showLogin();
+        }
+
+        function showDashboard() {
+            showSection('dashboard-section');
+            updateUserInterface();
+            showDashboardTab('calendar');
+        }
+
+        function showLogin() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('signup-form').style.display = 'none';
+        }
+
+        function showSignup() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'block';
+        }
+
+        // Auth functions
+        function handleLogin(event) {
+            event.preventDefault();
+            const accountType = document.getElementById('account-type-login').value;
+            const username = document.getElementById('username-login').value;
+            const password = document.getElementById('password-login').value;
+            
+            // Simple authentication simulation
+            const users = JSON.parse(localStorage.getItem('purrschedule-users') || '[]');
+            const user = users.find(u => u.username === username && u.password === password && u.accountType === accountType);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('purrschedule-user', JSON.stringify(user));
+                showDashboard();
+            } else {
+                alert('Invalid credentials');
+            }
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const accountType = document.getElementById('account-type-signup').value;
+            const language = document.getElementById('language-signup').value;
+            const username = document.getElementById('username-signup').value;
+            const email = document.getElementById('email-signup').value;
+            const phone = document.getElementById('phone-signup').value;
+            const password = document.getElementById('password-signup').value;
+            
+            const user = {
+                accountType,
+                language,
+                username,
+                email,
+                phone,
+                password,
+                id: Date.now().toString()
+            };
+            
+            if (accountType === 'creator') {
+                user.businessName = document.getElementById('business-name').value;
+                user.county = document.getElementById('county').value;
+                user.city = document.getElementById('city').value;
+                user.street = document.getElementById('street').value;
+                user.number = document.getElementById('number').value;
+                user.services = [];
+                user.schedule = {
+                    workingDays: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'],
+                    startTime: '09:00',
+                    endTime: '17:00'
+                };
+                user.followers = [];
+            } else {
+                user.following = [];
+            }
+            
+            const users = JSON.parse(localStorage.getItem('purrschedule-users') || '[]');
+            users.push(user);
+            localStorage.setItem('purrschedule-users', JSON.stringify(users));
+            
+            currentUser = user;
+            localStorage.setItem('purrschedule-user', JSON.stringify(user));
+            showDashboard();
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('purrschedule-user');
+            showSection('language-selection');
+        }
+
+        function toggleSignupFields() {
+            const accountType = document.getElementById('account-type-signup').value;
+            const businessNameGroup = document.getElementById('business-name-group');
+            const locationFields = document.getElementById('location-fields');
+            
+            if (accountType === 'creator') {
+                businessNameGroup.style.display = 'block';
+                locationFields.style.display = 'block';
+            } else {
+                businessNameGroup.style.display = 'none';
+                locationFields.style.display = 'none';
+            }
+        }
+
+        // Dashboard functions
+        function updateUserInterface() {
+            const welcome = document.getElementById('user-welcome');
+            welcome.textContent = `Welcome, ${currentUser.username}!`;
+            
+            // Show/hide navigation items based on account type
+            if (currentUser.accountType === 'creator') {
+                document.getElementById('nav-schedule-li').style.display = 'block';
+                document.getElementById('nav-services-li').style.display = 'block';
+                document.getElementById('nav-search-li').style.display = 'none';
+            } else {
+                document.getElementById('nav-schedule-li').style.display = 'none';
+                document.getElementById('nav-services-li').style.display = 'none';
+                document.getElementById('nav-search-li').style.display = 'block';
+            }
+            
+            updateLanguage();
+        }
+
+        function showDashboardTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.dashboard-tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.display = 'none';
+            });
+            
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show selected tab
+            const selectedTab = document.getElementById(tabName + '-tab');
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+                selectedTab.style.display = 'block';
+            }
+            
+            // Add active class to selected nav link
+            const navLink = document.querySelector(`[onclick="showDashboardTab('${tabName}')"]`);
+            if (navLink) {
+                navLink.classList.add('active');
+            }
+            
+            // Load tab-specific content
+            if (tabName === 'services') {
+                loadServices();
+            } else if (tabName === 'following') {
+                loadFollowing();
+            }
+        }
+
+        // Calendar functions
+        function generateCalendar() {
+            const grid = document.getElementById('calendar-grid');
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'];
+            
+            document.getElementById('current-month').textContent = 
+                `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+            
+            grid.innerHTML = '';
+            
+            // Add day headers
+            const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            dayHeaders.forEach(day => {
+                const header = document.createElement('div');
+                header.className = 'calendar-day';
+                header.style.fontWeight = 'bold';
+                header.style.backgroundColor = 'var(--secondary-purple)';
+                header.style.color = 'var(--white)';
+                header.textContent = day;
+                grid.appendChild(header);
+            });
+            
+            // Calculate first day of month and number of days
+            const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+            const startingDay = firstDay.getDay();
+            const numberOfDays = lastDay.getDate();
+            
+            // Add empty cells for days before month starts
+            for (let i = 0; i < startingDay; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day';
+                emptyDay.style.color = '#ccc';
+                grid.appendChild(emptyDay);
+            }
+            
+            // Add days of the month
+            for (let day = 1; day <= numberOfDays; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                dayElement.onclick = () => selectDate(day);
+                
+                // Check if day has appointments
+                const dateString = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+                const appointments = getAppointments(dateString);
+                if (appointments.length > 0) {
+                    dayElement.style.backgroundColor = 'var(--primary-bg)';
+                    dayElement.innerHTML += `<br><small>${appointments.length} appointments</small>`;
+                }
+                
+                grid.appendChild(dayElement);
+            }
+        }
+
+        function previousMonth() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            generateCalendar();
+        }
+
+        function nextMonth() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            generateCalendar();
+        }
+
+        function selectDate(day) {
+            selectedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+            
+            // Update calendar display
+            document.querySelectorAll('.calendar-day').forEach(dayEl => {
+                dayEl.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+            
+            // Show appointment form
+            document.getElementById('appointment-form').style.display = 'block';
+            generateTimeSlots();
+        }
+
+        function generateTimeSlots() {
+            const slotsContainer = document.getElementById('time-slots');
+            slotsContainer.innerHTML = '';
+            
+            for (let hour = 9; hour < 18; hour++) {
+                for (let minute = 0; minute < 60; minute += 30) {
+                    const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+                    const slot = document.createElement('div');
+                    slot.className = 'time-slot';
+                    slot.textContent = timeString;
+                    slot.onclick = () => selectTime(timeString, slot);
+                    
+                    // Check if slot is booked
+                    if (selectedDate && isSlotBooked(selectedDate, timeString)) {
+                        slot.classList.add('booked');
+                        slot.onclick = null;
+                    }
+                    
+                    slotsContainer.appendChild(slot);
+                }
+            }
+        }
+
+        function selectTime(time, element) {
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                slot.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            selectedTime = time;
+        }
+
+        // Appointment functions
+        function bookAppointment() {
+            if (!selectedDate || !selectedTime) {
+                alert('Please select date and time');
+                return;
+            }
+            
+            const clientName = document.getElementById('client-name').value;
+            if (!clientName) {
+                alert('Please enter client name');
+                return;
+            }
+            
+            const serviceSelect = document.getElementById('service-select');
+            const selectedService = serviceSelect.value;
+            
+            const appointment = {
+                id: Date.now().toString(),
+                date: selectedDate,
+                time: selectedTime,
+                clientName,
+                service: selectedService,
+                creatorId: currentUser.id,
+                createdAt: new Date().toISOString()
+            };
+            
+            const appointments = JSON.parse(localStorage.getItem('purrschedule-appointments') || '[]');
+            appointments.push(appointment);
+            localStorage.setItem('purrschedule-appointments', JSON.stringify(appointments));
+            
+            alert(translations[currentLanguage]['appointment-booked']);
+            cancelBooking();
+            generateCalendar();
+        }
+
+        function cancelBooking() {
+            document.getElementById('appointment-form').style.display = 'none';
+            selectedDate = null;
+            selectedTime = null;
+            document.getElementById('client-name').value = '';
+        }
+
+        function getAppointments(date) {
+            const appointments = JSON.parse(localStorage.getItem('purrschedule-appointments') || '[]');
+            return appointments.filter(apt => apt.date === date && apt.creatorId === currentUser.id);
+        }
+
+        function isSlotBooked(date, time) {
+            const appointments = getAppointments(date);
+            return appointments.some(apt => apt.time === time);
+        }
+
+        // Services functions
+        function loadServices() {
+            const servicesList = document.getElementById('services-list');
+            const serviceSelect = document.getElementById('service-select');
+            
+            servicesList.innerHTML = '';
+            serviceSelect.innerHTML = '<option value="">Select a service</option>';
+            
+            if (currentUser.services) {
+                currentUser.services.forEach(service => {
+                    // Add to services list
+                    const serviceCard = document.createElement('div');
+                    serviceCard.className = 'card';
+                    serviceCard.innerHTML = `
+                        <h4>${service.name}</h4>
+                        <p>Duration: ${service.duration} minutes</p>
+                        ${service.price ? `<p>Price: ${service.price} ${service.currency}</p>` : ''}
+                        <button class="btn btn-outline" onclick="deleteService('${service.id}')">Delete</button>
+                    `;
+                    servicesList.appendChild(serviceCard);
+                    
+                    // Add to service select
+                    const option = document.createElement('option');
+                    option.value = service.id;
+                    option.textContent = service.name;
+                    serviceSelect.appendChild(option);
+                });
+            }
+        }
+
+        function showAddService() {
+            document.getElementById('add-service-form').style.display = 'block';
+        }
+
+        function hideAddService() {
+            document.getElementById('add-service-form').style.display = 'none';
+            clearServiceForm();
+        }
+
+        function addService() {
+            const name = document.getElementById('service-name').value;
+            const duration = document.getElementById('service-duration').value;
+            const price = document.getElementById('service-price').value;
+            const currency = document.getElementById('service-currency').value;
+            
+            if (!name || !duration) {
+                alert('Please fill in required fields');
+                return;
+            }
+            
+            const service = {
+                id: Date.now().toString(),
+                name,
+                duration: parseInt(duration),
+                price: price ? parseFloat(price) : null,
+                currency
+            };
+            
+            if (!currentUser.services) {
+                currentUser.services = [];
+            }
+            
+            currentUser.services.push(service);
+            updateUserInStorage();
+            
+            alert(translations[currentLanguage]['service-added']);
+            hideAddService();
+            loadServices();
+        }
+
+        function deleteService(serviceId) {
+            if (confirm('Are you sure you want to delete this service?')) {
+                currentUser.services = currentUser.services.filter(s => s.id !== serviceId);
+                updateUserInStorage();
+                loadServices();
+            }
+        }
+
+        function clearServiceForm() {
+            document.getElementById('service-name').value = '';
+            document.getElementById('service-duration').value = '60';
+            document.getElementById('service-price').value = '';
+            document.getElementById('service-currency').value = 'RON';
+        }
+
+        // Schedule functions
+        function saveSchedule() {
+            const workingDays = [];
+            const dayCheckboxes = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+            
+            dayCheckboxes.forEach(day => {
+                if (document.getElementById(day).checked) {
+                    workingDays.push(day);
+                }
+            });
+            
+            const startTime = document.getElementById('start-time').value;
+            const endTime = document.getElementById('end-time').value;
+            
+            currentUser.schedule = {
+                workingDays,
+                startTime,
+                endTime
+            };
+            
+            updateUserInStorage();
+            alert(translations[currentLanguage]['schedule-saved']);
+        }
+
+        // Following functions
+        function loadFollowing() {
+            const followingList = document.getElementById('following-list');
+            followingList.innerHTML = '';
+            
+            if (currentUser.accountType === 'client') {
+                if (currentUser.following && currentUser.following.length > 0) {
+                    const users = JSON.parse(localStorage.getItem('purrschedule-users') || '[]');
+                    currentUser.following.forEach(followedId => {
+                        const followedUser = users.find(u => u.id === followedId);
+                        if (followedUser) {
+                            const card = document.createElement('div');
+                            card.className = 'card';
+                            card.innerHTML = `
+                                <h4>${followedUser.businessName || followedUser.username}</h4>
+                                <p>📧 ${followedUser.email}</p>
+                                <p>📞 ${followedUser.phone}</p>
+                                ${followedUser.city ? `<p>📍 ${followedUser.city}, ${followedUser.county}</p>` : ''}
+                                <button class="btn btn-primary" onclick="viewCreatorCalendar('${followedUser.id}')">View Calendar</button>
+                                <button class="btn btn-outline" onclick="unfollowCreator('${followedUser.id}')">Unfollow</button>
+                            `;
+                            followingList.appendChild(card);
+                        }
+                    });
+                } else {
+                    followingList.innerHTML = '<p>You are not following any creators yet. Use the search function to find creators to follow.</p>';
+                }
+            } else {
+                // Creator view - show followers
+                if (currentUser.followers && currentUser.followers.length > 0) {
+                    const users = JSON.parse(localStorage.getItem('purrschedule-users') || '[]');
+                    currentUser.followers.forEach(followerId => {
+                        const follower = users.find(u => u.id === followerId);
+                        if (follower) {
+                            const card = document.createElement('div');
+                            card.className = 'card';
+                            card.innerHTML = `
+                                <h4>${follower.username}</h4>
+                                <p>📧 ${follower.email}</p>
+                                <p>📞 ${follower.phone}</p>
+                                <span class="status-online"></span>Follower
+                            `;
+                            followingList.appendChild(card);
+                        }
+                    });
+                } else {
+                    followingList.innerHTML = '<p>No followers yet.</p>';
+                }
+            }
+        }
+
+        function searchCreator() {
+            const username = document.getElementById('search-username').value.trim();
+            const resultsContainer = document.getElementById('search-results');
+            
+            if (!username) {
+                resultsContainer.innerHTML = '';
+                return;
+            }
+            
+            const users = JSON.parse(localStorage.getItem('purrschedule-users') || '[]');
+            const creator = users.find(u => u.username === username && u.accountType === 'creator');
+            
+            if (creator) {
+                const isFollowing = currentUser.following && currentUser.following.includes(creator.id);
+                resultsContainer.innerHTML = `
+                    <div class="card">
+                        <h4>${creator.businessName || creator.username}</h4>
+                        <p>📧 ${creator.email}</p>
+                        <p>📞 ${creator.phone}</p>
+                        ${creator.city ? `<p>📍 ${creator.city}, ${creator.county}</p>` : ''}
+                        ${isFollowing ? 
+                            '<button class="btn btn-outline" onclick="unfollowCreator(\'' + creator.id + '\')">Unfollow</button>' :
+                            '<button class="btn btn-primary" onclick="followCreator(\'' + creator.id + '\')">Follow</button>'
+                        }
+                    </div>
+                `;
+            } else {
+                resultsContainer.innerHTML = `<p>${translations[currentLanguage]['user-not-found']}</p>`;
+            }
+        }
+
+        function followCreator(creatorId) {
+            if (!currentUser.following) {
+                currentUser.following = [];
+            }
+            
+            if (!currentUser.following.includes(creatorId)) {
+                currentUser.following.push(creatorId);
+                updateUserInStorage();
+                
+                // Add to creator's followers list
+                const users = JSON.parse(localStorage.getItem('purrschedule-users') || '[]');
+                const creator = users.find(u => u.id === creatorId);
+                if (creator) {
+                    if (!creator.followers) {
+                        creator.followers = [];
+                    }
+                    creator.followers.push(currentUser.id);
+                    localStorage.setItem('purrschedule-users', JSON.stringify(users));
+                }
+                
+                alert(translations[currentLanguage]['follow-success']);
+                searchCreator(); // Refresh results
+            }
+        }
+
+        function unfollowCreator(creatorId) {
+            if (currentUser.following) {
+                currentUser.following = currentUser.following.filter(id => id !== creatorId);
+                updateUserInStorage();
+                
+                // Remove from creator's followers list
+                const users = JSON.parse(localStorage.getItem('purrschedule-users') || '[]');
+                const creator = users.find(u => u.id === creatorId);
+                if (creator && creator.followers) {
+                    creator.followers = creator.followers.filter(id => id !== currentUser.id);
+                    localStorage.setItem('purrschedule-users', JSON.stringify(users));
+                }
+                
+                if (document.getElementById('following-tab').classList.contains('active')) {
+                    loadFollowing();
+                } else {
+                    searchCreator(); // Refresh search results
+                }
+            }
+        }
+
+        // User management functions
+        function updateUserInStorage() {
+            localStorage.setItem('purrschedule-user', JSON.stringify(currentUser));
+            
+            // Update in users array
+            const users = JSON.parse(localStorage.getItem('purrschedule-users') || '[]');
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            if (userIndex !== -1) {
+                users[userIndex] = currentUser;
+                localStorage.setItem('purrschedule-users', JSON.stringify(users));
+            }
+        }
+
+        function showUserInfo() {
+            showDashboardTab('user-info');
+            const userDetails = document.getElementById('user-details');
+            userDetails.innerHTML = `
+                <p><strong>Username:</strong> ${currentUser.username}</p>
+                <p><strong>Email:</strong> ${currentUser.email}</p>
+                <p><strong>Phone:</strong> ${currentUser.phone}</p>
+                <p><strong>Language:</strong> ${currentUser.language}</p>
+                ${currentUser.accountType === 'creator' ? `
+                    <p><strong>Business Name:</strong> ${currentUser.businessName || 'Not set'}</p>
+                    <p><strong>Location:</strong> ${[currentUser.street, currentUser.city, currentUser.county].filter(Boolean).join(', ') || 'Not set'}</p>
+                ` : ''}
+            `;
+        }
+
+        function showPasswordReset() {
+            showDashboardTab('password-reset');
+        }
+
+        function resetPassword() {
+            const code = document.getElementById('reset-code').value;
+            const newPassword = document.getElementById('new-password').value;
+            
+            if (code !== '2009') {
+                alert(translations[currentLanguage]['invalid-reset-code']);
+                return;
+            }
+            
+            if (!newPassword) {
+                alert('Please enter a new password');
+                return;
+            }
+            
+            currentUser.password = newPassword;
+            updateUserInStorage();
+            
+            alert(translations[currentLanguage]['password-reset-success']);
+            document.getElementById('reset-code').value = '';
+            document.getElementById('new-password').value = '';
+        }
+
+        // Dropdown functions
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('language-dropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('user-dropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        // Close dropdowns when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.btn')) {
+                const dropdowns = document.getElementsByClassName('dropdown-content');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    dropdowns[i].classList.remove('show');
+                }
+            }
+        }
+
+        // Notification functions
+        function checkReminders() {
+            if (!currentUser || currentUser.accountType !== 'client') return;
+            
+            const appointments = JSON.parse(localStorage.getItem('purrschedule-appointments') || '[]');
+            const now = new Date();
+            const in24Hours = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+            
+            appointments.forEach(appointment => {
+                if (currentUser.following && currentUser.following.includes(appointment.creatorId)) {
+                    const appointmentDateTime = new Date(`${appointment.date}T${appointment.time}`);
+                    
+                    // Check if appointment is in 24 hours (within 1 minute tolerance)
+                    const timeDiff = appointmentDateTime.getTime() - now.getTime();
+                    if (timeDiff > 23 * 60 * 60 * 1000 && timeDiff < 25 * 60 * 60 * 1000) {
+                        showReminder(appointment);
+                    }
+                }
+            });
+        }
+
+        function showReminder(appointment) {
+            const users = JSON.parse(localStorage.getItem('purrschedule-users') || '[]');
+            const creator = users.find(u => u.id === appointment.creatorId);
+            
+            if (creator) {
+                const location = [creator.street, creator.city, creator.county].filter(Boolean).join(', ');
+                const reminderText = translations[currentLanguage]['reminder-text']
+                    .replace('{time}', appointment.time)
+                    .replace('{location}', location)
+                    .replace('{business}', creator.businessName || creator.username)
+                    .replace('{phone}', creator.phone);
+                
+                document.getElementById('notification-text').textContent = reminderText;
+                document.getElementById('notification').classList.add('show');
+            }
+        }
+
+        function closeNotification() {
+            document.getElementById('notification').classList.remove('show');
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
